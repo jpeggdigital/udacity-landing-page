@@ -56,11 +56,10 @@ function genNavBar () {
 
     function menuCreation() {
         let head = document.querySelectorAll('h2');
-        // let link = "section";
         for (let i = 0; i < head.length; i++) {
             const newNav = document.createElement('li');
-            let z = i + 1;
-            newNav.innerHTML = '<a class = "menu__link" href = "#section' + z + '">' + head[i].textContent + '</a>';
+            let secId = 'section' + (i + 1);
+            newNav.innerHTML = '<a class = "menu__link" href = "#' + secId + '">' + head[i].textContent + '</a>';
             const newList = document.querySelector('#navbar__list');
             newList.appendChild(newNav);
         }
@@ -83,5 +82,59 @@ genNavBar();
 // Scroll to section on link click
 
 // Set sections as active
+
+
+//--------------------------old code ----------------------------
+
+/** Original working dynamic menu
+function genNavBar () {
+    menuCreation();
+
+    function menuCreation() {
+        let head = document.querySelectorAll('h2');
+        for (let i = 0; i < head.length; i++) {
+            const newNav = document.createElement('li');
+            let secId = 'section' + (i + 1);
+            newNav.innerHTML = '<a class = "menu__link" href = "#' + secId + '">' + head[i].textContent + '</a>';
+            const newList = document.querySelector('#navbar__list');
+            newList.appendChild(newNav);
+        }
+    }
+}
+
+genNavBar();
+/*
+
+
+
+
+
+// newNav.addEventListener('click', e => {
+//     e.preventDefault();
+//     //removeClass('menu__link','activeLink')
+//     //removeClass('active', 'active')
+//     //secId.classList.add("active")
+//     //newNav.classList.add("activeLink")
+//     secId.scrollIntoView({ behavior: "smooth" })
+//  });
+
+
+
+// const moveTo = document.querySelector('#navbar__list');
+
+//navbar__list.addEventListener('click', function() {
+    //const sectionHead = document.querySelector(event.srcElement.hash);
+    //console.log(event.target);
+    //sectionHead.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+//});
+
+// function smoothScroll (section) {
+//     const sectionNumber = document.querySelector('#section;
+//     const sectionHead = document.getElementById(sectionNumber);
+
+//     sectionHead.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+// }
+
+
 
 
