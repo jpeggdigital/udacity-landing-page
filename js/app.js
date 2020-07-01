@@ -51,24 +51,42 @@
     // const navSection = document.querySelector('H2').textContent;
 
 
-// function arrCreation {
+function arrCreation() {
     let head = document.querySelectorAll('h2');
-    let listArr = []
-    for (let i = 0; i < head.length; i++) {
-        listArr.push(head[i].textContent);
-         
-    }
-    console.log(listArr);
-
-    // let head = document.querySelectorAll('h2');
+    let listArr = [];
     let secArr = [];
     for (let i = 0; i < head.length; i++) {
+        listArr.push(head[i].textContent);
         secArr.push('section' + (i + 1));
-        
-    } 
-    console.log(secArr);
-//}
+        const newNav = document.createElement('li');
+        newNav.innerHTML = '<a class = "menu__link" href = "#' + secArr[i] + '">' + listArr[i] + '</a>';
+        const newList = document.querySelector('#navbar__list');
+        newList.appendChild(newNav);    
+    }
+            listArr.addEventListener('click', e => {
+            e.preventDefault();
+            removeClass('menu__link','activeLink')
+            removeClass('active', 'active')
+            secArr.classList.add("active")
+            listArr.classList.add("activeLink")
+            secArr.scrollIntoView({ behavior: "smooth" })
+            });
     
+    // console.log(listArr, secArr);
+}
+
+arrCreation();
+// let myGeneratedNav = listArr[2];
+// let myGeneratedSec = secArr[2];
+// myGeneratedNav.addEventListener('click', e => {
+//     e.preventDefault();
+//     removeClass('menu__link','activeLink')
+//     removeClass('active', 'active')
+//     myGeneratedSec.classList.add("active")
+//     myGeneratedNav.classList.add("activeLink")
+//     myGeneratedSec.scrollIntoView({ behavior: "smooth" })
+//  });
+
 
 
 // function genNavBar () {
