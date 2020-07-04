@@ -34,31 +34,35 @@
 */
 
 // build the nav
-let head = document.querySelectorAll('h2');
-let listArr = [];
-let secArr = [];
-for (let i = 0; i < head.length; i++) {
-    listArr.push(head[i].textContent);
-    secArr.push('section' + (i + 1));
-    const newNav = document.createElement('li');
-    newNav.innerHTML = '<a id = "secNum' + (i+1) + '" class = "menu__link" class = "nav__create" href = "#' + secArr[i] + '">' + listArr[i] + '</a>';
-    const newList = document.querySelector('#navbar__list');
-    newList.appendChild(newNav);    
+
+function buildNav(){
+    let head = document.querySelectorAll('h2');
+    let listArr = [];
+    let secArr = [];
+    for (let i = 0; i < head.length; i++) {
+        listArr.push(head[i].textContent);
+        secArr.push('section' + (i + 1));
+        const newNav = document.createElement('li');
+        newNav.innerHTML = '<a id = "secNum' + (i+1) + '" class = "menu__link" class = "nav__create" href = "#' + secArr[i] + '">' + listArr[i] + '</a>';
+        const newList = document.querySelector('#navbar__list');
+        newList.appendChild(newNav);    
+    }
 }
 
-    function smoothScroll() {    
+    function smoothScroll() {     
         const navLink = document.querySelectorAll('.menu__link');
         for (let i = 0; i < navLink.length; i++){
             navLink[i].addEventListener ('click', function(event) {
             event.preventDefault();
-            let newSecID = 'section'+(i + 1);
-            console.log(newSecID);
-            newSecID.scrollIntoView({ behavior: "smooth" });
+            const newSecID = 'section'+(i + 1);
+            const navScroll = document.getElementById(newSecID);
+            navScroll.scrollIntoView({ behavior: "smooth" });
         });
         } 
     }
 
-
+    buildNav();
+    smoothScroll();
 
 // Add class 'active' to section when near top of viewport
 
@@ -77,4 +81,3 @@ for (let i = 0; i < head.length; i++) {
 // Scroll to section on link click
 
 // Set sections as active
-
