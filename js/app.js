@@ -63,7 +63,23 @@ function buildNav(){
     }
 
 // Add class 'active' to section when near top of viewport
-    // function setActive(screenLoc)
+    function setActive() {
+        let setLocation = document.querySelectorAll('.location');
+        for (let i = 0; i < setLocation.length; i++) {
+            window.addEventListener('scroll', function () {
+                const topHead = setLocation[i].getBoundingClientRect().top;
+                const newHeadID = 'section'+(i + 1);
+                const navActive = document.getElementById(newHeadID);
+                const oldActive = document.querySelector('.your-active-class');
+                if (topHead <= 400 && topHead > -100) {
+                    oldActive.classList.remove('your-active-class');
+                    navActive.classList.add('your-active-class');
+                }
+            })
+        }
+    }
+
+    setActive();
 
 // Hide Heading section on scroll event
 
@@ -88,12 +104,3 @@ smoothScroll();
 
 // Hide Heading section on scroll event
 // hideHeader();
-function myFunction() {
-    const x = document.querySelector('.your-active-class');
-    const y = document.querySelector('#section1');
-    x.classList.remove('your-active-class');
-    x.classList.add('anotherclass');
-    y.classList.add('your-active-class');
-    //let y = x.getAttribute('id');
-    console.log(x, y);
-}
