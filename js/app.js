@@ -42,12 +42,20 @@ function buildNav(){
     for (let i = 0; i < head.length; i++) {
         listArr.push(head[i].textContent);
         secArr.push('section' + (i + 1));
+        if (i === 0) {
+            const newNav = document.createElement('li');
+            newNav.innerHTML = '<a class = "menu__link nav__create update-menu" href = "#' + secArr[i] + '">' + listArr[i] + '</a>';
+            const newList = document.querySelector('#navbar__list');
+            newList.appendChild(newNav);
+        } else {
         const newNav = document.createElement('li');
-        newNav.innerHTML = '<a class = "menu__link" class = "nav__create" href = "#' + secArr[i] + '">' + listArr[i] + '</a>';
+        newNav.innerHTML = '<a class = "menu__link nav__create" href = "#' + secArr[i] + '">' + listArr[i] + '</a>';
         const newList = document.querySelector('#navbar__list');
-        newList.appendChild(newNav);    
+        newList.appendChild(newNav);
+        }
     }
 }
+
 
 // Scroll to anchor ID using scrollIntoView event
     function smoothScroll() {     
@@ -59,7 +67,7 @@ function buildNav(){
             const navScroll = document.getElementById(newSecID);
             navScroll.scrollIntoView({ behavior: "smooth" });
         });
-        } 
+        }
     }
 
 // Add class 'active' to section when near top of viewport
@@ -69,17 +77,26 @@ function buildNav(){
             window.addEventListener('scroll', function () {
                 const topHead = setLocation[i].getBoundingClientRect().top;
                 const newHeadID = 'section'+(i + 1);
-                const navActive = document.getElementById(newHeadID);
+                const newActive = document.getElementById(newHeadID);
                 const oldActive = document.querySelector('.your-active-class');
-                if (topHead <= 400 && topHead > -100) {
+                const oldMenu = document.querySelector('.update-menu');
+                if (topHead <= 500 && topHead > -100 ) {
                     oldActive.classList.remove('your-active-class');
-                    navActive.classList.add('your-active-class');
+                    newActive.classList.add('your-active-class');
+                            let menuLocation = document.querySelectorAll('.menu__link');
+                                for (let m = 0; m < menuLocation.length; m++) {
+                                    //let p = i;
+                                    const menuUpdate = menuLocation[i];
+                                    oldMenu.classList.remove('update-menu');
+                                    menuUpdate.classList.add('update-menu');
+                               }
                 }
             })
         }
     }
 
-    setActive();
+    
+ 
 
 // Hide Heading section on scroll event
 
@@ -98,9 +115,13 @@ function buildNav(){
 
 // Build menu 
 buildNav();
+
 // Scroll to section on link click
 smoothScroll();
+
 // Set sections as active
+setActive();
 
 // Hide Heading section on scroll event
+
 // hideHeader();
