@@ -54,11 +54,11 @@ function buildNav(){
         newList.appendChild(newNav);
         }
     }
+    return listArr;
 }
 
-
 // Scroll to anchor ID using scrollIntoView event
-    function smoothScroll() {     
+    function smoothScroll() {
         const navLink = document.querySelectorAll('.menu__link');
         for (let i = 0; i < navLink.length; i++){
             navLink[i].addEventListener('click', function(event) {
@@ -96,15 +96,42 @@ function buildNav(){
     }
 
     //  Hide Heading section on scroll event
-    document.addEventListener("scroll", hideHeader);
-    function hideHeader() {
-        const myHeader = document.querySelector('.page__header');
-        document.addEventListener('scroll', function (event) {
-            myHeader.style.display = 'none';
-            setTimeout(function(){ myHeader.style.display = 'block' }, 800);
-        });
+    function detectScroll() {
+        document.addEventListener('scroll', hideHeader);
     }
 
+    function hideHeader() {
+        const myHeader = document.querySelector('.page__header');
+        myHeader.style.display = 'none';
+        setTimeout(function(){ myHeader.style.display = 'block' }, 800);
+    }
+
+    // Create collapsible sections
+    function expandSection() {
+        let setCollapse = document.querySelectorAll('h2');
+        for (let i = 0; i < setCollapse.length; i++) {
+            setCollapse[i].addEventListener('click', changeState);
+        }
+    }
+
+    function changeState() {
+                //const sectionText = setCollapse[i];
+                //const expandText = sectionText.querySelectorAll('h2');
+                //const thisElement = this.outerHTML;
+                const parentElement = this.parentElement;
+                const para = parentElement.querySelectorAll('p');
+                //const childElement = parentElement.childNode;
+                console.log(parentElement, para.length);
+                for (let j = 0; j < para.length; j++) {
+                    const textUpdate = para[j];
+                    textUpdate.classList.toggle('text-hide');
+                    console.log(para[j]);
+                }
+                //const newHeadID = 'section'+(i + 1);
+                //const newActive = document.getElementById(newHeadID);
+                //
+          
+    }
 
 
 /**
@@ -124,4 +151,6 @@ setActive();
 
 // Hide Heading section on scroll event
 
-hideHeader();
+detectScroll();
+
+expandSection();
