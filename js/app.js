@@ -95,17 +95,17 @@ function buildNav(){
         }
     }
 
-    
- 
+    //  Hide Heading section on scroll event
+    document.addEventListener("scroll", hideHeader);
+    function hideHeader() {
+        const myHeader = document.querySelector('.page__header');
+        document.addEventListener('scroll', function (event) {
+            myHeader.style.display = 'none';
+            setTimeout(function(){ myHeader.style.display = 'block' }, 800);
+        });
+    }
 
-// Hide Heading section on scroll event
 
-    // function hideHeader(){
-    //     window.addEventListener('scroll', function() {
-    //         const mainHeader = document.querySelector('.page__header');
-    //         mainHeader.style.background = 'red';
-    //     });
-    // }    
 
 /**
  * End Main Functions
@@ -124,4 +124,4 @@ setActive();
 
 // Hide Heading section on scroll event
 
-// hideHeader();
+hideHeader();
